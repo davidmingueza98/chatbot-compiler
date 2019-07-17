@@ -1,0 +1,206 @@
+<<
+/* parser.dlg -- DLG Description of scanner
+ *
+ * Generated from: lego.g
+ *
+ * Terence Parr, Will Cohen, and Hank Dietz: 1989-2001
+ * Purdue University Electrical Engineering
+ * With AHPCRC, University of Minnesota
+ * ANTLR Version 1.33MR33
+ */
+
+#define ANTLR_VERSION	13333
+#include "pcctscfg.h"
+#include "pccts_stdio.h"
+
+#include <string>
+#include <iostream>
+#include <map>
+#include <cstdlib>
+using namespace std;
+
+// struct to store information about tokens
+typedef struct {
+  string kind; //tipus de token o el número que indica que tipus és, cada token en veritat té un número asociat
+  string text;
+} Attrib;
+
+// function to fill token information (predeclaration)
+void zzcr_attr(Attrib *attr, int type, char *text);
+
+// fields for AST nodes
+#define AST_FIELDS string kind; string text; //en el lloc del codi que posi AST_FIELDS cambiara per el que posa a la dreta
+#include "ast.h"
+
+// macro to create a new AST node (and function predeclaration)
+#define zzcr_ast(as,attr,ttype,textt) as=createASTnode(attr,ttype,textt)
+AST* createASTnode(Attrib* attr, int ttype, char *textt); // sinó el compilador es queixa
+#include "antlr.h"
+#include "ast.h"
+#include "tokens.h"
+#include "dlgdef.h"
+LOOKAHEAD
+
+void
+#ifdef __USE_PROTOS
+zzerraction(void)
+#else
+zzerraction()
+#endif
+{
+	(*zzerr)("invalid token");
+	zzadvance();
+	zzskip();
+}
+>>
+
+
+%%START
+
+@
+	<<
+		NLA = 1;
+	>>
+
+[0-9]+
+	<<
+		NLA = NUM;
+	>>
+
+Grid
+	<<
+		NLA = GRID;
+	>>
+
+PLACE
+	<<
+		NLA = PLACE;
+	>>
+
+MOVE
+	<<
+		NLA = MOVE;
+	>>
+
+WHILE
+	<<
+		NLA = WHILE;
+	>>
+
+AT
+	<<
+		NLA = AT;
+	>>
+
+and
+	<<
+		NLA = AND;
+	>>
+
+not
+	<<
+		NLA = NOT;
+	>>
+
+or
+	<<
+		NLA = OR;
+	>>
+
+\->
+	<<
+		NLA = F;
+	>>
+
+\[
+	<<
+		NLA = CLAU1;
+	>>
+
+\]
+	<<
+		NLA = CLAU2;
+	>>
+
+\{
+	<<
+		NLA = BRACKET1;
+	>>
+
+\}
+	<<
+		NLA = BRACKET2;
+	>>
+
+\(
+	<<
+		NLA = PAR1;
+	>>
+
+\)
+	<<
+		NLA = PAR2;
+	>>
+
+\#
+	<<
+		NLA = HASHTG;
+	>>
+
+\;
+	<<
+		NLA = SEMICOLON;
+	>>
+
+\,
+	<<
+		NLA = COMMA;
+	>>
+
+\=
+	<<
+		NLA = EQUALS;
+	>>
+
+\<
+	<<
+		NLA = MENOR;
+	>>
+
+\>
+	<<
+		NLA = MAYOR;
+	>>
+
+?
+	<<
+		NLA = ENDQ;
+	>>
+
+end
+	<<
+		NLA = END;
+	>>
+
+write
+	<<
+		NLA = WRITE;
+	>>
+
+[a-zA-Z][a-zA-Z0-9]*
+	<<
+		NLA = TXT;
+	>>
+
+\:
+	<<
+		NLA = COLON;
+	>>
+
+[\ \n]
+	<<
+		NLA = SPACE;
+    zzskip();  
+	>>
+
+%%
