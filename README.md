@@ -1,5 +1,6 @@
 # chatbot-compiler
-Compiler for a custom Chatbot language. The Chatbot consits in a set of structured conversations that have answers and questions.
+Compiler for a custom Chatbot language. The Chatbot can make questions and list possible answers to gather the response.
+The language is defined in a set of structured conversations that have answers and questions.
 
 ## Installation
 Compile the program before using it. You need:
