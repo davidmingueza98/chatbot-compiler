@@ -1,17 +1,20 @@
 # chatbot-compiler
-Compiler for a Chatbot language 
+Compiler for a custom Chatbot language. The Chatbot consits in a set of structured conversations that have answers and questions.
 
-This language defines simple Chatbot that can make questions and lists of possible answers. In this language, a Chatbot is a set of structured conversations that have answers and questions.
+## Installation
+Compile the program before using it. You need:
+- `antlr`
+- `dlg`
+- `g++`
 
-## How to compile the compiler
-:shipit:
 ```
 antlr -gt program.g
 dlg -ci parser.dlg scan.c
 g++ -o program program.c scan.c err.c
 ```
+Compilers are compiled? :shipit:
 
-## Example of the language and output
+## Example
 Input
 ```
 Q1: QUESTION
